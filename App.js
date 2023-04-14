@@ -1,40 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import { View, Text, TextInput, ImageBackground, Button } from 'react-native';
-import axios
+import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { Text, View, Modal, Button } from "react-native-paper";
 
-const Componentes = () =>{
-  const [numero1, setNumero1] = useState(0)
-  const [numero2, setNumero2] = useState(0)
+export default function App(){
 
-  useEffect(() =>{
-    console.log("useEffect - executado")
-  }, [numero1, numero2])
-  console.log("componente() - executado")
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Componente</Text>
-        <Text>Numero1: {numero1}</Text>
-        <Button
-          title="add"
-          onPress={() => {
-            setNumero1(numero1 + 1)
-          }}
-        />
-        <Text>Numero2: {numero2}</Text>
-        <Button
-          title="add"
-          onPress={() => {
-            setNumero2(numero2 + 1)
-          }}
-        />
-      </View>
-    );
+  const [modalVisual, setModalVisual] = useState(false)
+
+  class NewPageModal extends React.Component{
+    constructor(props){
+      super(props)
+      modalVisevel(false)
+    }
+    render()
+    {
+      return(
+        <Modal transparent = {true}
+      visible={modalVisual(false)}>
+        <View>
+          <Text>paggina modal</Text>
+          <Button title =" voltar pagina incial" onPress={()=>{
+            setModalVisual(false)
+          }}/>
+        </View>
+      </Modal>
+      )
+      
+    }
+
   }
 
-export default () => {
-  return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
-      <Componentes />
+  return(
+
+
+    <View style ={{flex: 1, justifyContent: "center", 
+    alignText: "center"}}>
+      <Text>Tela principal</Text>
+      <Button title="abrir modal " onPress={()=>{
+        setModalVisual(true)
+      }}/>
+      <NewPageModal/>
     </View>
-  );
-};
+  )
+}
